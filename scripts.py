@@ -23,9 +23,9 @@ def find_child(child_name):
 		child = Schoolkid.objects.get(full_name__contains=child_name)
 		return child
 	except Schoolkid.DoesNotExist:
-		print('Такого ученика нет в базе данных либо допущена ошибка в имени')
+		print('Такого ученика нет в базе данных либо допущена ошибка в имени.')
 	except Schoolkid.MultipleObjectsReturned:
-		print('Слишком много подходящих учеников, введите полное имя')
+		print('Слишком много подходящих учеников, введите полное имя.')
 
 def fix_marks(schoolkid):
 	Mark.objects.filter(schoolkid=schoolkid, points__in=['2','3']).update(points=choice(['4', '5']))
@@ -35,14 +35,17 @@ def remove_chastisements(schoolkid):
 	chastisements.delete()
 
 def create_commendation(schoolkid, subject_name=None):
-	try:
 		class_num = schoolkid.year_of_study
 		class_letter = schoolkid.group_letter
 
 		if subject_name:
 			cap_subject_name = subject_name.capitalize()
-			subject = Subject.objects.get(title=cap_subject_name, year_of_study=class_num)
-			lesson = Lesson.objects.get(year_of_study=class_num, group_letter__contains=class_letter, subject=subject)
+			subject_check = Subject.objects.filter(title=cap_subject_name, year_of_study=class_num).exists()
+			if not subject_check:
+				return 'Такого предмета не существует или Вы ввели не правильно название'
+			else:	
+				subject = Subject.objects.get(title=cap_subject_name, year_of_study=class_num)
+				lesson = Lesson.objects.get(year_of_study=class_num, group_letter__contains=class_letter, subject=subject)
 		else:
 			subject = Subject.objects.filter(year_of_study=class_num).order_by('?').first()
 			lesson = Lesson.objects.filter(year_of_study=class_num, group_letter__contains=class_letter).last()
@@ -54,7 +57,4 @@ def create_commendation(schoolkid, subject_name=None):
 									subject=subject,
 									teacher=lesson.teacher)
 		else:
-			return 'Урока по этому предмету нет'
-			
-	except Subject.DoesNotExist:
-		print('Такого предмета нет или Вы ошиблись в названии')
+			return 'Урока по этому предмету нет.'
