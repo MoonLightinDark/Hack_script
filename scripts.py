@@ -38,6 +38,7 @@ def create_commendation(schoolkid, lesson_name=None):
 	try:
 		class_num = schoolkid.year_of_study
 		class_letter = schoolkid.group_letter
+
 		if lesson_name:
 			cap_lesson_name = lesson_name.capitalize()
 			subject = Subject.objects.get(title=cap_lesson_name, year_of_study=class_num)
@@ -46,10 +47,14 @@ def create_commendation(schoolkid, lesson_name=None):
 			subject = Subject.objects.filter(year_of_study=class_num).order_by('?').first()
 			lesson = Lesson.objects.filter(year_of_study=class_num, group_letter__contains=class_letter).last()
 
-		Commendation.objects.create(text=choice(COMPLIMENTS),
-								created=lesson.date,
-								schoolkid=schoolkid,
-								subject=subject,
-								teacher=lesson.teacher)
+		if lesson:
+			Commendation.objects.create(text=choice(COMPLIMENTS),
+									created=lesson.date,
+									schoolkid=schoolkid,
+									subject=subject,
+									teacher=lesson.teacher)
+		else:
+			return 'Урока по этому предмету нет'
+			
 	except Subject.DoesNotExist:
 		print('Такого предмета нет или Вы ошиблись в названии')
