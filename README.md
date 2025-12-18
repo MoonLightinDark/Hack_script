@@ -14,7 +14,8 @@ cd *Путь до папки e-diary*
 ```
 > убрать звездочки и вписать путь до указанной папки
 
-<img width="936" height="157" alt="image" src="https://github.com/user-attachments/assets/2f7f8d7c-bc88-4344-8ae3-9dd6e932b9db" />
+<img width="917" height="178" alt="image" src="https://github.com/user-attachments/assets/17bf7e93-64d9-419d-b426-e66c6c537792" />
+
 
 Дальше установить все необходимые пакеты введя в командную строку команду:
 ```
@@ -43,7 +44,8 @@ ALLOWED_HOSTS='127.0.0.1', 'localhost'
 python3 manage.py runserver
 ```
 **Важно**: Не закрывайте окошко командной строки с запущенным сервером. Для запуска скриптов из файла scripts.py необходимо открыть вторую консоль и прописывать последующие команды там.
-<img width="861" height="194" alt="image" src="https://github.com/user-attachments/assets/35bb1eb3-e551-4f96-8f41-ff5a47a96dae" />
+<img width="843" height="236" alt="image" src="https://github.com/user-attachments/assets/33bc792f-8cc8-4938-a151-f5cce208007d" />
+
 
 Более подробную информацию об устройстве сайта прочитайте в [README](https://github.com/devmanorg/e-diary/blob/master/README.md) расположенному в репозитории с сайтом.
 
@@ -53,7 +55,8 @@ python3 manage.py runserver
 ```
 python manage.py shell
 ```
-<img width="941" height="176" alt="image" src="https://github.com/user-attachments/assets/39186712-f460-4092-a9e9-b1563cfdfeeb" />
+<img width="895" height="187" alt="image" src="https://github.com/user-attachments/assets/40bb4221-d821-420e-ac13-d83630329f7e" />
+
 
 
 Дальше нам вызвать в нашу командную строку наш скрипт, делается это с помощью ввода команды:
