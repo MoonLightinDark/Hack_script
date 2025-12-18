@@ -42,10 +42,10 @@ def create_commendation(schoolkid, subject_name=None):
 			cap_subject_name = subject_name.capitalize()
 			subject_check = Subject.objects.filter(title=cap_subject_name, year_of_study=class_num).exists()
 			if not subject_check:
-				return 'Такого предмета не существует или Вы ввели не правильно название'
+				return 'Такого предмета не существует или Вы ввели не правильное название'
 			else:	
 				subject = Subject.objects.get(title=cap_subject_name, year_of_study=class_num)
-				lesson = Lesson.objects.get(year_of_study=class_num, group_letter__contains=class_letter, subject=subject)
+				lesson = Lesson.objects.filter(year_of_study=class_num, group_letter__contains=class_letter, subject=subject).last()
 		else:
 			subject = Subject.objects.filter(year_of_study=class_num).order_by('?').first()
 			lesson = Lesson.objects.filter(year_of_study=class_num, group_letter__contains=class_letter).last()
