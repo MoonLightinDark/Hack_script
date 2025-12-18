@@ -41,7 +41,7 @@ def create_commendation(schoolkid, lesson_name=None):
 		if lesson_name:
 			cap_lesson_name = lesson_name.capitalize()
 			subject = Subject.objects.get(title=cap_lesson_name, year_of_study=class_num)
-			lesson = Lesson.objects.get(year_of_study=class_num, group_letter__contains=class_letter, subject=subject).last()
+			lesson = Lesson.objects.get(year_of_study=class_num, group_letter__contains=class_letter, subject=subject)
 		else:
 			subject = Subject.objects.filter(year_of_study=class_num).order_by('?').first()
 			lesson = Lesson.objects.filter(year_of_study=class_num, group_letter__contains=class_letter).last()
