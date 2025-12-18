@@ -38,13 +38,13 @@ def create_commendation(schoolkid, lesson_name=None):
 	try:
 		class_num = schoolkid.year_of_study
 		class_letter = schoolkid.group_letter
-		if lesson_name is None:
-			subject = Subject.objects.filter(year_of_study=class_num).order_by('?').first()
-			lesson = Lesson.objects.filter(year_of_study__contains=class_num, group_letter__contains=class_letter).last()
-		else:
+		if lesson_name:
 			cap_lesson_name = lesson_name.capitalize()
 			subject = Subject.objects.get(title=cap_lesson_name, year_of_study=class_num)
 			lesson = Lesson.objects.get(year_of_study__contains=class_num, group_letter__contains=class_letter, subject=subject).last()
+		else:
+			subject = Subject.objects.filter(year_of_study=class_num).order_by('?').first()
+			lesson = Lesson.objects.filter(year_of_study__contains=class_num, group_letter__contains=class_letter).last()
 
 		Commendation.objects.create(text=choice(COMPLIMENTS),
 								created=lesson.date,
