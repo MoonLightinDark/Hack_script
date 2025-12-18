@@ -28,9 +28,7 @@ def find_child(child_name):
 		print('Слишком много подходящих учеников, введите полное имя')
 
 def fix_marks(schoolkid):
-	marks = Mark.objects.filter(schoolkid=schoolkid, points__in=['2','3'])
-	for mark in marks:
-		mark.points = choice(['4', '5'])
+	Mark.objects.filter(schoolkid=schoolkid, points__in=['2','3']).update(points=choice(['4', '5']))
 
 def remove_chastisements(schoolkid):
 	chastisements = Chastisement.objects.filter(schoolkid=schoolkid)
