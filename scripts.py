@@ -31,8 +31,7 @@ def fix_marks(schoolkid):
 	Mark.objects.filter(schoolkid=schoolkid, points__in=[2,3]).update(points=choice([4, 5]))
 
 def remove_chastisements(schoolkid):
-	chastisements = Chastisement.objects.filter(schoolkid=schoolkid)
-	chastisements.delete()
+	chastisements = Chastisement.objects.filter(schoolkid=schoolkid).delete()
 
 def create_commendation(schoolkid, subject_name=None):
 		class_num = schoolkid.year_of_study
